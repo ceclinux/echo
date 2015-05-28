@@ -1,0 +1,89 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+cd ~/我的坚果云/echo/test
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +6 community.py
+badd +64 ~/我的坚果云/echo/app/template/index.html
+badd +118 ~/我的坚果云/echo/app/static/demo.css
+argglobal
+silent! argdel *
+edit ~/我的坚果云/echo/app/template/index.html
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+3
+normal! zo
+26
+normal! zo
+27
+normal! zo
+28
+normal! zo
+29
+normal! zo
+35
+normal! zo
+36
+normal! zo
+40
+normal! zo
+61
+normal! zo
+62
+normal! zo
+82
+normal! zo
+84
+normal! zo
+85
+normal! zo
+88
+normal! zo
+102
+normal! zo
+103
+normal! zo
+225
+normal! zo
+226
+normal! zo
+230
+normal! zo
+let s:l = 64 - ((0 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+64
+normal! 034|
+tabnext 1
+if exists('s:wipebuf')
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=filnxtToO
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+let g:this_obsession = v:this_session
+unlet SessionLoad
+" vim: set ft=vim :

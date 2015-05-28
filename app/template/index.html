@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Flat UI - Free Bootstrap Framework and Theme</title>
+        <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
+
+        <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+        <!-- Loading Bootstrap -->
+        <link href="static/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Loading Flat UI -->
+        <link href="static/flat-ui.css" rel="stylesheet">
+        <link href="static/rotate.css" rel="stylesheet">
+        <link href="static/demo.css" rel="stylesheet">
+        <link rel="shortcut icon" href="img/favicon.ico">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+        <!--[if lt IE 9]>
+        <script src="dist/js/vendor/html5shiv.js"></script>
+        <script src="dist/js/vendor/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                    </button>
+                    <a class="navbar-brand" href="#">Flat UI</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../navbar/">Default</a></li>
+                        <li class="active"><a href="./">Static top</a></li>
+                        <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        <div class="container-fluid" style="padding-left:0px;padding-right:0px">
+            <div class="demo-headline" style="background:linear-gradient(to top,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%),url(static/backgrond-test.jpg);box-shadow:0 6px 10px #666;padding-bottom:20px">
+                <h1 class="demo-logo" style="font-family:'Georgia', 'Xin Gothic', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 'Microsoft YaHei', 'SimSun', sans-serif; color:white;">
+                    <div class="logo" ></div>
+                    {{ blogname }}
+                    <small style="color:gray;width:40%;margin-left:auto;margin-right:auto">{{ introduction }}</small> </h1>
+            </div> <!-- /demo-headline -->
+
+            <div class="container">
+                {{ body | safe}}
+            </div><!-- /.container -->
+
+
+
+
+            <script src="static/jquery.min.js"></script>
+            <script src="static/video.js"></script>
+            <script src="static/flat-ui.min.js"></script>
+            <script src="static/application.js"></script>
+
+        </body>
+        <footer style="position:static;bottom: 0;
+            width: 100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-7">
+
+
+                        <h3 class="footer-title">
+                            This blog is powered by <u><a href="https://github.com/ceclinux/echo" target="_blank">Echo</a></u>, inspired by <u><a href="https://github.com/RicterZ/pyprint" target="_blank">Pyprint</a></u>.
+
+                        </h3>
+                        <p>
+
+                            <img src="http://flask.pocoo.org/static/logo/flask.svg" alt="http://flask.pocoo.org/" height="30px">&nbsp;&nbsp;
+
+                            <img src="http://designmodo.github.io/Flat-UI/docs/assets/img/demo/logo-mask.png" height="30px">&nbsp;&nbsp;
+                            <img src="http://upload.wikimedia.org/wikipedia/commons/2/29/GitHub_logo_2013.svg" height="30px">
+                        </p>
+                    </div> <!-- /col-xs-7 -->
+
+                    <div class="col-xs-5">
+                        <div class="footer-banner" style="min-height:100px">
+                            <h3 class="footer-title">Contacts</h3>
+                            <ul>
+                                <li>Email<a href="mailto:{{ email }}"><address>{{ email }}</address></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </html>
