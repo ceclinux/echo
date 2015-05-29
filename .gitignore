@@ -1,0 +1,5 @@
+.vimsession
+.vimSession
+Session.vim
+*.swp
+__Tag_List__
