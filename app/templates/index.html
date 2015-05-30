@@ -8,12 +8,13 @@
         <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 
         <!-- Loading Bootstrap -->
-        <link href="static/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/bootstrap.min.css" rel="stylesheet">
 
         <!-- Loading Flat UI -->
-        <link href="static/flat-ui.css" rel="stylesheet">
-        <link href="static/rotate.css" rel="stylesheet">
-        <link href="static/demo.css" rel="stylesheet">
+        <link href="/static/flat-ui.css" rel="stylesheet">
+        <link href="/static/rotate.css" rel="stylesheet">
+        <link href="/static/demo.css" rel="stylesheet">
+        <script src="/static/jquery.min.js"></script>
         <link rel="shortcut icon" href="img/favicon.ico">
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -58,24 +59,24 @@
             </div>
         </div>
         <div class="container-fluid" style="padding-left:0px;padding-right:0px">
-            <div class="demo-headline" style="background:linear-gradient(to top,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%),url(static/background-test.jpg);box-shadow:0 6px 10px #666;padding-bottom:20px">
+            <div class="demo-headline" style="background:linear-gradient(to top,rgba(0,0,0,0.8) 0,rgba(0,0,0,0.0001) 100%),url({{ background }});box-shadow:0 6px 10px #666;padding-bottom:20px">
                 <h1 class="demo-logo" style="font-family:'Georgia', 'Xin Gothic', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 'Microsoft YaHei', 'SimSun', sans-serif; color:white;">
-                    <div class="logo" ></div>
+                    <div class="logo" style="background: url({{ head_image }}) center no-repeat;background-size:200px 200px"></div>
                     {{ blogname }}
                     <small style="color:gray;width:40%;margin-left:auto;margin-right:auto">{{ introduction }}</small> </h1>
             </div> <!-- /demo-headline -->
 
             <div class="container">
                 {{ body | safe}}
+                {% block page_content%}{% endblock%}
             </div><!-- /.container -->
 
 
 
 
-            <script src="static/jquery.min.js"></script>
-            <script src="static/video.js"></script>
-            <script src="static/flat-ui.min.js"></script>
-            <script src="static/application.js"></script>
+            <script src="/static/video.js"></script>
+            <script src="/static/flat-ui.min.js"></script>
+            <script src="/static/application.js"></script>
 
         </body>
         <footer style="position:static;bottom: 0;

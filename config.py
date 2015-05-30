@@ -6,6 +6,9 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     FLASKY_MAIL_SUBJECT_PREFIX = '[Echo]'
     ECHO_MAIL_SENDER = 'Ruochen Shen <src655@gmail.com>'
+    DEFAULT_BACKGROUND = 'http://img.vim-cn.com/5a/0afa5a08d5bc65a8be7232a49d699fe33cad58.jpg'
+    DEFAULT_HEAD_IMAGE = 'http://img.vim-cn.com/d9/43603e57e56daeda2811d66bd5c42de098dd7b.png'
+    DEFAULT_NAME = '无名氏'
 
     @staticmethod
     def init_app(app):
