@@ -4,6 +4,7 @@ from . import auth
 from .. import db
 from ..models import User
 from .forms import LoginForm, RegistrationForm
+from ..decorators import *
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -16,7 +17,9 @@ def login():
         flash('Invalid username or password.')
     return render_template('auth/registerandlogin.html', form=form)
 
+
 @auth.route('/register', methods=['GET', 'POST'])
+@has_user_registered
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
