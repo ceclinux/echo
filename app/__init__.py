@@ -21,7 +21,7 @@ class MyServer(Flask):
             super(MyServer, self).__init__(*args, **kwargs)
 
             #instanciate your variables here
-            self.has_user = False
+            self.user = None
 
 
 def create_app(config_name):
@@ -42,8 +42,7 @@ def create_app(config_name):
     @app.before_first_request
     def def_user(*args, **kwargs):
         g.db = sqlite3.connect(current_app.config['DATABASE_URI'])
-        if query_db('select * from user'):
-            current_app.has_user = True
+        current_app.user = query_db('select * from user')
     return app
 
 def query_db(query, args=(), one=False):
