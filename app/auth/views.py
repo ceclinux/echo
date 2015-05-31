@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash, current_app
+from flask import render_template, redirect, request, url_for, flash, current_app, g
 from flask.ext.login import login_user
 from . import auth
 from .. import db
@@ -23,6 +23,7 @@ def register():
         user = User(email=form.email.data, username=form.username.data, password=form.password.data, head_image = current_app.config['DEFAULT_HEAD_IMAGE'],background = current_app.config['DEFAULT_BACKGROUND'], blogname = form.username.data +" 's Blog")
         db.session.add(user)
         db.session.commit()
+        current_app.has_user=True
         flash('Congratulations!You has been registed')
         return redirect(url_for('main.index'))
     return render_template('auth/registerandlogin.html', form=form)

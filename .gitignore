@@ -4,3 +4,4 @@ Session.vim
 *.swp
 __Tag_List__
 *.sqlite
+__pycache__

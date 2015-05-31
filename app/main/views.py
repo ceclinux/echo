@@ -1,10 +1,11 @@
 import markdown
-from flask import render_template, current_app
+from flask import render_template, current_app, request, g
 from . import main
 
 
 @main.route('/')
 def index():
+    print(current_app.has_user)
     text = ""
     body=markdown.markdown(text, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
     return render_template('index.html',mardown = markdown , email="src655@gmail.com")
