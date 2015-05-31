@@ -42,7 +42,7 @@ def create_app(config_name):
     @app.before_first_request
     def def_user(*args, **kwargs):
         g.db = sqlite3.connect(current_app.config['DATABASE_URI'])
-        current_app.user = query_db('select * from user')
+        current_app.user = query_db('select * from user')[0]
     return app
 
 def query_db(query, args=(), one=False):
