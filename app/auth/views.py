@@ -1,8 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash, current_app, g
 from flask.ext.login import login_user
 from . import auth
-from .. import db
-from ..models import User
+from .. import db, User
 from .forms import LoginForm, RegistrationForm
 from ..decorators import *
 import re
@@ -27,7 +26,8 @@ def register():
         user = User(email=form.email.data,  password=form.password.data, head_image = current_app.config['DEFAULT_HEAD_IMAGE'],background = current_app.config['DEFAULT_BACKGROUND'], blogname = re.sub(r'@.*', '', form.email.data))
         db.session.add(user)
         db.session.commit()
-        current_app.user=user
+        db.session.expire_on_commit = False
+        current_app.user = User.query.get(1)
         flash('注册成功～\(^o^)/~')
         return redirect(url_for('main.index'))
     return render_template('auth/registerandlogin.html', form=form, header="Register")

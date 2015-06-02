@@ -1,4 +1,6 @@
 from flask.ext.pagedown import PageDown
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.login import UserMixin, AnonymousUserMixin
 from flask import Flask, render_template, session, current_app, g
 from flask.ext.mail import Mail
 from flask.ext.moment import Moment
@@ -6,14 +8,14 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import config
-import sqlite3
 
 login_manager = LoginManager()
 bootstrap = Bootstrap()
 mail = Mail()
 moment = Moment()
-db = SQLAlchemy()
+db = SQLAlchemy(session_options={'expire_on_commit': False})
 pagedown = PageDown()
+
 
 class MyServer(Flask):
 
@@ -41,12 +43,30 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     @app.before_first_request
     def def_user(*args, **kwargs):
-        g.db = sqlite3.connect(current_app.config['DATABASE_URI'])
-        current_app.user = query_db('select * from user')[0]
+        current_app.user = User.query.get(1)
     return app
 
-def query_db(query, args=(), one=False):
-    cur = g.db.execute(query, args)
-    rv = [dict((cur.description[idx][0], value)
-               for idx, value in enumerate(row)) for row in cur.fetchall()]
-    return (rv[0] if rv else None) if one else rv
+class User(UserMixin, db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(64))
+    password_hash = db.Column(db.String(128))
+    head_image = db.Column(db.String(128))
+    background = db.Column(db.String(128))
+    blogname = db.Column(db.String(128))
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
