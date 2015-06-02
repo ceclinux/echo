@@ -30,15 +30,15 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-                    <a class="navbar-brand" href="#">Flat UI</a>
+                    <a class="navbar-brand" href="#">{{ blogname }}</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li class="active"><a href="/">主页</a></li>
+                        <li><a href="#about">关于我</a></li>
+                        {% if current_user.is_authenticated() %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">设置 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Action</a></li>
                                 <li><a href="#">Another action</a></li>
@@ -49,10 +49,14 @@
                                 <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../navbar/">Default</a></li>
-                        <li class="active"><a href="./">Static top</a></li>
+                        {% if current_user.is_authenticated() %}
+                        <li><a href="/auth/logout">登出</a></li>
+                        {% else %}
+                        <li><a href="/auth/login">登入</a></li>
+                        {% endif %}
                         <li><a href="../navbar-fixed-top/">Fixed top</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -92,7 +96,7 @@
 
 
                         <h3 class="footer-title">
-                            This blog is powered by <u><a href="https://github.com/ceclinux/echo" target="_blank">Echo</a></u>, inspired by <u><a href="https://github.com/RicterZ/pyprint" target="_blank">Pyprint</a></u>.
+                            This blog is powered by <u><a href="https://github.com/ceclinux/echo" target="_blank">Echo</a></u>, inspired by <u><a href="https://github.com/RicterZ/pyprint" target="_blank">Pyprint</a></u>  and  <u><a href="https://github.com/miguelgrinberg/flasky">Flasky</a></u>.
 
                         </h3>
                         <p>
