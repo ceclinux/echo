@@ -35,18 +35,17 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/">主页</a></li>
-                        <li><a href="#about">关于我</a></li>
                         {% if current_user.is_authenticated() %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">设置 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <!--<li><a href="#">Action</a></li>-->
+                                <!--<li><a href="#">Another action</a></li>-->
+                                <!--<li><a href="#">Something else here</a></li>-->
+                                <!--<li class="divider"></li>-->
+                                <!--<li class="dropdown-header">Nav header</li>-->
+                                <!--<li><a href="#">Separated link</a></li>-->
+                                <li><a href="/edit">修改头像、背景</a></li>
                             </ul>
                         </li>
                         {% endif %}
@@ -57,7 +56,6 @@
                         {% else %}
                         <li><a href="/auth/login">登入</a></li>
                         {% endif %}
-                        <li><a href="../navbar-fixed-top/">Fixed top</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -67,7 +65,7 @@
                 <h1 class="demo-logo" style="font-family:'Georgia', 'Xin Gothic', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', 'Microsoft YaHei', 'SimSun', sans-serif; color:white;">
                     <div class="logo" style="background: url({{ head_image }}) center no-repeat;background-size:200px 200px"></div>
                     {{ blogname }}
-                    <small style="color:gray;width:40%;margin-left:auto;margin-right:auto">{{ introduction }}</small> </h1>
+                    <small style="color:gray;width:40%;margin-left:auto;margin-right:auto">{{ about_me }}</small> </h1>
             </div> <!-- /demo-headline -->
 {% for message in get_flashed_messages() %}
 <div class="alert alert-warning">

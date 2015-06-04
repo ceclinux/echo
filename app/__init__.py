@@ -31,6 +31,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
     login_manager.login_view="auth.login"
+    login_manager.login_message="先要登录才能看哦"
     login_manager.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
@@ -54,6 +55,7 @@ class User(UserMixin, db.Model):
     head_image = db.Column(db.String(128))
     background = db.Column(db.String(128))
     blogname = db.Column(db.String(128))
+    about_me = db.Column(db.String(1024))
 
     @property
     def password(self):

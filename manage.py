@@ -1,5 +1,5 @@
 import os
-from app import create_app, db
+from app import create_app, db, User
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -15,4 +15,3 @@ manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
     app.run(debug=True)
-

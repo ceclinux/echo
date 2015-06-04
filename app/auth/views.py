@@ -15,7 +15,7 @@ def login():
             login_user(user, True)
             return redirect(url_for('main.index'))
         flash('Invalid username or password.')
-    return render_template('auth/registerandlogin.html', form=form, header="Login")
+    return render_template('auth/registerandlogin.html', form=form, header="登录")
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -23,14 +23,13 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data,  password=form.password.data, head_image = current_app.config['DEFAULT_HEAD_IMAGE'],background = current_app.config['DEFAULT_BACKGROUND'], blogname = re.sub(r'@.*', '', form.email.data))
+        user = User(email=form.email.data,  password=form.password.data, head_image = current_app.config['DEFAULT_HEAD_IMAGE'],background = current_app.config['DEFAULT_BACKGROUND'], blogname = re.sub(r'@.*', '', form.email.data), about_me = "")
         db.session.add(user)
         db.session.commit()
-        db.session.expire_on_commit = False
         current_app.user = User.query.get(1)
         flash('注册成功～\(^o^)/~')
         return redirect(url_for('main.index'))
-    return render_template('auth/registerandlogin.html', form=form, header="Register")
+    return render_template('auth/registerandlogin.html', form=form, header="注册")
 
 @auth.route('/logout')
 @login_required
