@@ -8,7 +8,6 @@ from .. import db, User, Post
 
 @main.route('/')
 def index():
-    text = ""
     body=markdown.markdown(text, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
     return render_template('index.html', markdown = markdown)
 
@@ -39,5 +38,12 @@ def post():
         db.session.add(post)
         db.session.commit()
         flash('文章发出成功！')
-        return redirect(url_for('.index'))
+        return redirect(url_for('.p', id=post.id))
     return render_template('post.html', form = form)
+
+
+@main.route('/p/<int:id>', methods=['GET'])
+def p(id):
+    post = Post.query.get(id)
+    body=markdown.markdown(post.body, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
+    return render_template('index.html', body = body)
