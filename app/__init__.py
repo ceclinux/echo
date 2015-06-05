@@ -8,6 +8,7 @@ from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import config
+from datetime import datetime
 
 login_manager = LoginManager()
 bootstrap = Bootstrap()
@@ -68,6 +69,13 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key = True)
+    body = db.Column(db.Text)
+    #body_html = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index = True, default=datetime.utcnow)
+    tags = db.Column(db.String(128))
 
 @login_manager.user_loader
 def load_user(user_id):

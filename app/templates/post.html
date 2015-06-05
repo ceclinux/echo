@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<div class="page-header">
+    <h1>{{ header }}</h1>
+</div>
+{% block page_content %}
+<div class="page-header">
+    <h1>写文章</h1>
+</div>
+<!--{% from "_formhelpers.html" import render_field %}-->
+<!--<form method=post class="form" role="form">-->
+    <!--{{wtf.form_field(form.tagsinput)}}-->
+    <!--{{ render_field(form.postcontent) }}-->
+    <!--标签：<input name="tagsinput" class="tagsinput" data-role="tagsinput" value="School, Teacher, Colleague" style="display: none;">-->
+    <!--{{ render_field(form.submit) }}-->
+    <!--[><input id="submit" name="submit" type="submit" value="submit" class="btn btn-default"><]-->
+<!--</form>-->
+{{wtf.quick_form(form)}}
+<script type="text/javascript">
+    var editor = new Editor();
+    editor.render();
+    $('#tagsinput').addClass('tagsinput').attr('data-role', 'tagsinput')
+</script>
+
+
+{% endblock %}

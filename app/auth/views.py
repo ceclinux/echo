@@ -14,7 +14,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, True)
             return redirect(url_for('main.index'))
-        flash('Invalid username or password.')
+        flash('邮箱或者密码输错啦')
     return render_template('auth/registerandlogin.html', form=form, header="登录")
 
 

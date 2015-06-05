@@ -2,8 +2,8 @@ import markdown
 from flask import render_template, current_app, request, flash, redirect, url_for
 from flask.ext.login import logout_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm
-from .. import db, User
+from .forms import EditProfileForm, PostForm, BetterTagListField
+from .. import db, User, Post
 
 
 @main.route('/')
@@ -28,3 +28,16 @@ def edit():
     form.background.data = current_app.user.background
     form.about_me.data = current_app.user.about_me
     return render_template('edit_profile.html', form = form, header="设置")
+
+
+@main.route('/post', methods=['GET', 'POST'])
+@login_required
+def post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.postcontent.data, tags = form.tagsinput.data)
+        db.session.add(post)
+        db.session.commit()
+        flash('文章发出成功！')
+        return redirect(url_for('.index'))
+    return render_template('post.html', form = form)

@@ -11,7 +11,6 @@
         <link href="/static/bootstrap.min.css" rel="stylesheet">
 
         <!-- Loading Flat UI -->
-        <link href="/static/flat-ui.css" rel="stylesheet">
         <link href="/static/rotate.css" rel="stylesheet">
         <link href="/static/demo.css" rel="stylesheet">
         <script src="/static/jquery.min.js"></script>
@@ -21,7 +20,10 @@
         <!--[if lt IE 9]>
         <script src="dist/js/vendor/html5shiv.js"></script>
         <script src="dist/js/vendor/respond.min.js"></script>
-        <![endif]-->
+        <![endif]--><link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+<script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+<script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+
     </head>
     <body>
         <div class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0px">
@@ -30,14 +32,14 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-                    <a class="navbar-brand" href="#">{{ blogname }}</a>
+                    <a class="navbar-brand" href="/">{{ blogname }}</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">主页</a></li>
+                        <li {% if request.path == "/" %} class="active" {% endif %}><a href="/">主页</a></li>
                         {% if current_user.is_authenticated() %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">设置 <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown">设置 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <!--<li><a href="#">Action</a></li>-->
                                 <!--<li><a href="#">Another action</a></li>-->
@@ -75,6 +77,7 @@
 {% endfor %}
             <div class="container">
                 {{ body | safe}}
+
                 {% block page_content%}{% endblock%}
             </div><!-- /.container -->
 
@@ -84,6 +87,7 @@
             <script src="/static/video.js"></script>
             <script src="/static/flat-ui.min.js"></script>
             <script src="/static/application.js"></script>
+        <link href="/static/flat-ui.css" rel="stylesheet">
 
         </body>
         <footer style="position:static;bottom: 0;
