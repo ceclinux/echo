@@ -7,6 +7,7 @@ from ..decorators import *
 import re
 
 @auth.route('/login', methods=['GET', 'POST'])
+@has_not_user_registered
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -35,6 +36,6 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out.')
+    flash('你已经登出啦')
     return redirect(url_for('main.index'))
 

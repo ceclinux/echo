@@ -76,6 +76,7 @@ class Post(db.Model):
     #body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index = True, default=datetime.utcnow)
     tags = db.Column(db.String(128))
+    title = db.Column(db.String(128))
 
 @login_manager.user_loader
 def load_user(user_id):

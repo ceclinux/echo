@@ -2,14 +2,13 @@ import markdown
 from flask import render_template, current_app, request, flash, redirect, url_for
 from flask.ext.login import logout_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm, PostForm, BetterTagListField
+from .forms import EditProfileForm, PostForm
 from .. import db, User, Post
 
 
 @main.route('/')
 def index():
-    body=markdown.markdown(text, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
-    return render_template('index.html', markdown = markdown)
+    return render_template('index.html')
 
 
 @main.route('/edit', methods=['GET', 'POST'])
@@ -34,7 +33,7 @@ def edit():
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.postcontent.data, tags = form.tagsinput.data)
+        post = Post(body=form.postcontent.data, tags = form.tagsinput.data, title = form.tagsinput.data)
         db.session.add(post)
         db.session.commit()
         flash('文章发出成功！')
@@ -44,6 +43,6 @@ def post():
 
 @main.route('/p/<int:id>', methods=['GET'])
 def p(id):
-    post = Post.query.get(id)
+    post = Post.query.get_or_404(id)
     body=markdown.markdown(post.body, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
-    return render_template('index.html', body = body)
+    return render_template('index.html', body = body, title=post.title, tags=post.tags)

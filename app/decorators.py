@@ -6,7 +6,7 @@ def has_not_user_registered(f):
     def decorated_function(*args, **kwargs):
         if not current_app.user:
             flash('还没注册过呢～')
-            return redirect(url_for('main.index'))
+            return redirect(url_for('auth.register'))
         return f(*args, **kwargs)
     return decorated_function
 
