@@ -37,6 +37,15 @@ def post():
         post = Post(body=form.postcontent.data, tags = form.tagsinput.data, title = form.tagsinput.data)
         db.session.add(post)
         db.session.commit()
+        print(form.tagsinput.data)
+        print(type(form.tagsinput.data))
+        if not current_app.user.tags:
+            User.query.filter_by(id=1).update(dict(tags = form.tagsinput.data))
+            current_app.user = User.query.get(1)
+        tagsdiff = set(form.tagsinput.data.split(','))-set(current_app.user.tags.split(','))
+        if tagsdiff:
+            User.query.filter_by(id=1).update(dict(tags = current_app.user.tags +','+ ','.join(set(tagsdiff))))
+            current_app.user = User.query.get(1)
         flash('文章发出成功！')
         return redirect(url_for('.p', id=post.id))
     return render_template('post.html', form = form)

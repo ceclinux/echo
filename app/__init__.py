@@ -57,6 +57,7 @@ class User(UserMixin, db.Model):
     background = db.Column(db.String(128))
     blogname = db.Column(db.String(128))
     about_me = db.Column(db.String(1024))
+    tags = db.Column(db.String(1024))
 
     @property
     def password(self):
