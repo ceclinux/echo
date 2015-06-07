@@ -4,6 +4,7 @@ from flask.ext.login import logout_user, login_required, current_user
 from . import main
 from .forms import EditProfileForm, PostForm
 from .. import db, User, Post
+import sqlite3
 
 
 @main.route('/')
@@ -46,3 +47,8 @@ def p(id):
     post = Post.query.get_or_404(id)
     body=markdown.markdown(post.body, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
     return render_template('index.html', body = body, title=post.title, tags=post.tags)
+
+@main.route('/tag/<tagname>')
+def tag(tagname):
+    post = Post.query.filter(Post.tags.like('%'+tagname+'%'))
+    return render_template('tags.html', post=post)

@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="page-header">
+    <h1>{{ header }}</h1>
+</div>
+
+{% block page_content %}
+{% for po in post %}
+<h1>{{po.timestamp.strftime('%d, %b, %y')}}//<a href="/p/{{po.id}}">{{po.title}}</a></h1>
+{% endfor %}
+{% endblock %}

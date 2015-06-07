@@ -78,6 +78,7 @@ class Post(db.Model):
     tags = db.Column(db.String(128))
     title = db.Column(db.String(128))
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
