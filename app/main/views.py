@@ -59,5 +59,5 @@ def p(id):
 
 @main.route('/tag/<tagname>')
 def tag(tagname):
-    post = Post.query.filter(Post.tags.like('%'+tagname+'%'))
+    post = Post.query.filter(Post.tags.like('%'+tagname+'%')).order_by(Post.timestamp.desc())
     return render_template('tags.html', post=post)

@@ -90,7 +90,7 @@
                 {% block page_content%}{% endblock%}
 
                 {% if request.path[0:3] == '/p/' %}
-                <div class="text-right"><small>标签 {% for a in tags.split(',') %} <span class="label label-info">{{ a }}</span>{% endfor %}</small></div>
+                <div class="text-right"><small>标签 {% for ta in tags.split(',') %} <a href=" /tag/{{ ta }}"><span class="label label-info">{{ ta }}</span></a>{% endfor %}</small></div>
                 {% endif %}
 
             </div><!-- /.container -->
