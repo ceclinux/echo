@@ -44,12 +44,12 @@
                     <ul class="nav navbar-nav">
                         <li {% if request.path == "/" %} class="active" {% endif %}><a href="/">主页</a></li>
                         {% if current_user.is_authenticated() %}
-                                <li {% if request.path == "/edit" %} class="active" {% endif %}><a href="/edit">设置</a></li>
+                        <li {% if request.path == "/edit" %} class="active" {% endif %}><a href="/edit">设置</a></li>
 
                         <li {% if request.path == "/post" %} class="active" {% endif %}><a href="/post">写文章</a></li>
 
                         {% endif %}
-<li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown">标签 <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 {% for tag in tags.split(',')%}
@@ -87,10 +87,19 @@
                 <h2>{{ title }}</h2>
                 {{ body | safe}}
 
+                {%if request.path == '/'%}
+                {% for po in posts %}
+                <h2 id="posttitle">{{po.timestamp.strftime('%d, %b, %y')}}//<a href="/p/{{po.id}}">{{po.title}}</a></h2>
+                {% endfor %}
+                {% endif %}
+
                 {% block page_content%}{% endblock%}
 
                 {% if request.path[0:3] == '/p/' %}
+
                 <div class="text-right"><small>标签 {% for ta in tags.split(',') %} <a href=" /tag/{{ ta }}"><span class="label label-info">{{ ta }}</span></a>{% endfor %}</small></div>
+                <div class="row"><div class="col-md-offset-11 col-md-1"><a role="button" class="btn btn-info" href="/editpost/{{ request.path[3:]}}">编辑</a></div></div>
+
                 {% endif %}
 
             </div><!-- /.container -->

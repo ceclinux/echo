@@ -9,7 +9,8 @@ import sqlite3
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    post = Post.query.all()
+    return render_template('index.html', posts = post, title="文章")
 
 
 @main.route('/edit', methods=['GET', 'POST'])
@@ -34,7 +35,7 @@ def edit():
 def post():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.postcontent.data, tags = form.tagsinput.data, title = form.tagsinput.data)
+        post = Post(body=form.postcontent.data, tags = form.tagsinput.data, title = form.title.data)
         db.session.add(post)
         db.session.commit()
         print(form.tagsinput.data)
@@ -48,6 +49,16 @@ def post():
             current_app.user = User.query.get(1)
         flash('文章发出成功！')
         return redirect(url_for('.p', id=post.id))
+    return render_template('post.html', form = form)
+
+@main.route('/editpost/<int:i>', methods = ['GET', 'POST'])
+@login_required
+def editpost(i):
+    form = PostForm()
+    post = Post.query.get(i)
+    form.postcontent.data = post.body
+    form.title.data = post.title
+    form.tagsinput.data = post.tags
     return render_template('post.html', form = form)
 
 
