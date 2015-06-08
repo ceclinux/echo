@@ -8,4 +8,4 @@ from . import views
 def inject_configuration():
     if current_app.user:
         return dict(email=current_app.user.email,blogname=current_app.user.blogname, background=current_app.user.background, head_image=current_app.user.head_image, tags = current_app.user.tags )
-    return dict(head_image=current_app.config['DEFAULT_HEAD_IMAGE'], blogname=current_app.config['DEFAULT_NAME'],  background=current_app.config['DEFAULT_BACKGROUND'])
+    return dict(head_image=current_app.config['DEFAULT_HEAD_IMAGE'], blogname=current_app.config['DEFAULT_NAME'],  background=current_app.config['DEFAULT_BACKGROUND'], tags="")

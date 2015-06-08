@@ -41,10 +41,10 @@ def post():
         if not current_app.user.tags:
             User.query.filter_by(id=1).update(dict(tags = form.tagsinput.data))
             current_app.user = User.query.get(1)
-        tagsdiff = set(form.tagsinput.data.split(','))-set(current_app.user.tags.split(','))
-        if tagsdiff:
-            User.query.filter_by(id=1).update(dict(tags = current_app.user.tags +','+ ','.join(set(tagsdiff))))
-            current_app.user = User.query.get(1)
+            tagsdiff = set(form.tagsinput.data.split(','))-set(current_app.user.tags.split(','))
+            if tagsdiff:
+                User.query.filter_by(id=1).update(dict(tags = current_app.user.tags +','+ ','.join(set(tagsdiff))))
+                current_app.user = User.query.get(1)
         flash('文章发出成功！')
         return redirect(url_for('.p', id=post.id))
     return render_template('post.html', form = form)
@@ -60,10 +60,10 @@ def editpost(i):
         if post.tags != form.tagsinput.data:
             tags = current_app.user.tags.split(',')
             print(tags)
-            diff = list(set(form.tagsinput.data.split(',')) - set(current_app.user.tags.split(',')))
+            diff = list(set(form.tagsinput.data.split(',')) - set(post.tags))
             tags = tags + diff
             print(tags)
-            rediff = list(set(post.tags.split(',')) - set(form.tagsinput.data.split(',')))
+            rediff = list(set(post.tags) - set(form.tagsinput.data.split(',')))
             for a in rediff:
                 if Post.query.filter(Post.tags.like('%'+a+'%')).count() == 1:
                     tags.remove(a)

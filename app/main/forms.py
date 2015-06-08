@@ -13,5 +13,5 @@ class EditProfileForm(Form):
 class PostForm(Form):
     title = StringField('标题')
     postcontent = TextAreaField('写点什么把')
-    tagsinput = StringField('tags')
+    tagsinput = StringField('标签')
     submit = SubmitField('提交')
