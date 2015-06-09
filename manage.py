@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-  
 import os
 from app import create_app, db, User, Post
-from flask.ext.script import Manager, Shell
+from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
 app = create_app('heroku')
@@ -13,6 +13,8 @@ def make_shell_context():
 
 manager.add_command('shell', Shell(make_context = make_shell_context))
 manager.add_command('db', MigrateCommand)
+port=int(os.environ.get('PORT',  5000))
+manager.add_command('runserver', Server(port=port))
 
 @manager.command
 def deploy():
