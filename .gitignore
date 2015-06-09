@@ -5,4 +5,3 @@ Session.vim
 __Tag_List__
 *.sqlite
 __pycache__
-migrations
