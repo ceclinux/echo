@@ -5,7 +5,6 @@ from flask.ext.login import logout_user, login_required, current_user
 from . import main
 from .forms import EditProfileForm, PostForm
 from .. import db, User, Post
-import sqlite3
 
 
 @main.route('/')
