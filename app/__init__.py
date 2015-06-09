@@ -46,6 +46,9 @@ def create_app(config_name):
     @app.before_first_request
     def def_user(*args, **kwargs):
         current_app.user = User.query.get(1)
+    if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
+        from flask.ext.sslify import SSLify
+        sslify = SSLify(app)
     return app
 
 class User(UserMixin, db.Model):
