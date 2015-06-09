@@ -7,7 +7,7 @@ from app import create_app, db, User, Post
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
-app = create_app('production')
+app = create_app('heroku')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
