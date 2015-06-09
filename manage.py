@@ -1,8 +1,5 @@
 # -*- coding:utf-8 -*-  
 import os
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 from app import create_app, db, User, Post
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
