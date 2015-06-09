@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-  
 import markdown
 from flask import render_template, current_app, request, flash, redirect, url_for
 from flask.ext.login import logout_user, login_required, current_user

@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-  
 from flask import Blueprint, current_app
 from flask.ext.login import logout_user, login_required, current_user, login_user
 

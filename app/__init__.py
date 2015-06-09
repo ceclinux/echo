@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-  
 from flask.ext.pagedown import PageDown
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask.ext.login import UserMixin, AnonymousUserMixin
