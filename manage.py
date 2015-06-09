@@ -20,5 +20,10 @@ def deploy():
     from flask.ext.migrate import upgrade
     upgrade()
 
+@manager.command
+def init():
+    """Run deployment tasks."""
+    db.create_all()
+
 if __name__ == '__main__':
     manager.run()
