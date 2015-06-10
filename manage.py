@@ -5,6 +5,7 @@ from flask.ext.script import Manager, Shell, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
 app = create_app('heroku')
+app.debug=True
 manager = Manager(app)
 migrate = Migrate(app, db)
 
