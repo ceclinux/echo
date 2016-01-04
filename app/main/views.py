@@ -55,13 +55,11 @@ def editpost(i):
     form = PostForm()
     post = Post.query.get(i)
     if form.validate_on_submit():
-        print(post.tags)
-        print(form.tagsinput.data)
+        # print(post.tags)
+        # print(form.tagsinput.data)
         if post.tags != form.tagsinput.data:
             tags = current_app.user.tags.split(',')
-            print(tags)
             diff = list(set(form.tagsinput.data.split(',')) - set(current_app.user.tags.split(',')))
-            tags = tags + diff
             print(tags)
             rediff = list(set(post.tags.split(',')) - set(form.tagsinput.data.split(',')))
             for a in rediff:
@@ -78,6 +76,14 @@ def editpost(i):
     form.title.data = post.title
     form.tagsinput.data = post.tags
     return render_template('post.html', form = form)
+
+@main.route('/delete/<int:i>', methods = ['GET', 'POST'])
+@login_required
+def deletepost(i):
+    flash('文章删除成功！')
+    Post.query.filter_by(id=i).delete()
+    db.session.commit()
+    return render_template('index.html')
 
 
 @main.route('/p/<int:id>', methods=['GET'])

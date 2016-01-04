@@ -104,8 +104,9 @@
                 </div>
                 {% if current_user.is_authenticated() %}
                 <div class="row">
-                    <div class="col-md-offset-11 col-md-1">
+                    <div class="col-md-offset-10 col-md-2">
                         <a role="button" class="btn btn-info" href="/editpost/{{ request.path[3:]}}">编辑</a>
+                        <a role="button" class="btn btn-danger" href="/delete/{{ request.path[3:]}}">删除</a>
                     </div>
                 </div>
 
@@ -145,7 +146,7 @@
                         <p>
                             <a href="http://flask.pocoo.org/" target="_blank"><img src="http://flask.pocoo.org/static/logo/flask.svg" alt="http://flask.pocoo.org/" height="30px"></a>&nbsp;&nbsp;
                             <a href="http://designmodo.github.io/Flat-UI/" target="_blank"><img src="http://designmodo.github.io/Flat-UI/docs/assets/img/demo/logo-mask.png" height="30px"></a>&nbsp;&nbsp;
-                                <a href="http://heroku.com" target="_blank"><img src="http://upload.wikimedia.org/wikipedia/en/a/a9/Heroku_logo.png" height="30px"></a>
+                            <a href="http://heroku.com" target="_blank"><img src="http://upload.wikimedia.org/wikipedia/en/a/a9/Heroku_logo.png" height="30px"></a>
                         </p>
                     </div> <!-- /col-xs-7 -->
 
