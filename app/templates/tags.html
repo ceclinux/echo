@@ -6,6 +6,9 @@
 
 {% block page_content %}
 {% for po in post %}
+
+{%if not po.hide or current_user.is_authenticated()%}
 <h2 id="posttitle">{{po.timestamp.strftime('%d, %b, %y')}}//<a href="/p/{{po.id}}">{{po.title}}</a></h2>
+{% endif %}
 {% endfor %}
 {% endblock %}

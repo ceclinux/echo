@@ -77,20 +77,40 @@ def editpost(i):
     form.tagsinput.data = post.tags
     return render_template('post.html', form = form)
 
-@main.route('/delete/<int:i>', methods = ['GET', 'POST'])
+@main.route('/deletepost/<int:i>', methods = ['GET', 'POST'])
 @login_required
 def deletepost(i):
-    flash('文章删除成功！')
     Post.query.filter_by(id=i).delete()
     db.session.commit()
+    flash('文章删除成功！')
     return render_template('index.html')
 
+@main.route('/hidepost/<int:i>', methods = ['GET', 'POST'])
+@login_required
+def hidepost(i):
+    post = Post.query.filter_by(id=i).first()
+    post.hide = True
+    db.session.commit()
+    flash('文章隐藏成功！')
+    return render_template('index.html')
+
+@main.route('/showpost/<int:i>', methods = ['GET', 'POST'])
+@login_required
+def showpost(i):
+    post = Post.query.filter_by(id=i).first()
+    post.hide = False
+    db.session.commit()
+    flash('文章显示成功！')
+    return render_template('index.html')
 
 @main.route('/p/<int:id>', methods=['GET'])
 def p(id):
     post = Post.query.get_or_404(id)
+    if post.hide and not current_user.is_authenticated():
+        flash("这篇文章被作者隐藏啦！")
+        return redirect(url_for('main.index'))
     body=markdown.markdown(post.body, extensions=['markdown.extensions.nl2br', 'markdown.extensions.tables'])
-    return render_template('index.html', body = body, title=post.title, posttags=post.tags)
+    return render_template('index.html', body = body, title=post.title, posttags=post.tags, hide = post.hide)
 
 @main.route('/tag/<tagname>')
 def tag(tagname):

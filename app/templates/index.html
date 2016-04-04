@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>{{ blogname}}</title>
         <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
-        <meta property="og:image" content="http://sonnyt.com/assets/imgs/prettySocial.png" /> 
+        <meta property="og:image" content="http://sonnyt.com/assets/imgs/prettySocial.png" />
         <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
         <!-- Loading Bootstrap -->
         <link href="/static/bootstrap.min.css" rel="stylesheet">
@@ -88,7 +88,9 @@
 
                 {%if request.path == '/'%}
                 {% for po in posts %}
+                {%if not po.hide or current_user.is_authenticated()%}
                 <h2 id="posttitle">{{po.timestamp.strftime('%d, %b, %y')}}//<a href="/p/{{po.id}}">{{po.title}}</a></h2>
+                {% endif %}
                 {% endfor %}
                 {% endif %}
 
@@ -96,7 +98,7 @@
                 {% if request.path[0:3] == '/p/' %}
 
                 <div class="text-right">
-                    <small>标签 {% for ta in posttags.split(',') %} 
+                    <small>标签 {% for ta in posttags.split(',') %}
                         <a href=" /tag/{{ ta }}">
                             <span class="label label-info">{{ ta }}</span>
                         </a>{% endfor %}
@@ -104,9 +106,14 @@
                 </div>
                 {% if current_user.is_authenticated() %}
                 <div class="row">
-                    <div class="col-md-offset-10 col-md-2">
+                    <div class="col-md-offset-10 col-md-3">
+                        {% if not hide %}
+                        <a role="button" class="btn btn-primary" href="/hidepost/{{ request.path[3:]}}">隐藏</a>
+                        {% else %}
+                        <a role="button" class="btn btn-primary" href="/showpost/{{ request.path[3:]}}">显示</a>
+                        {% endif %}
                         <a role="button" class="btn btn-info" href="/editpost/{{ request.path[3:]}}">编辑</a>
-                        <a role="button" class="btn btn-danger" href="/delete/{{ request.path[3:]}}">删除</a>
+                        <a role="button" class="btn btn-danger" href="/deletepost/{{ request.path[3:]}}">删除</a>
                     </div>
                 </div>
 

@@ -82,6 +82,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index = True, default=datetime.utcnow)
     tags = db.Column(db.String(128))
     title = db.Column(db.String(128))
+    hide = db.Column(db.Boolean)
 
 
 @login_manager.user_loader
